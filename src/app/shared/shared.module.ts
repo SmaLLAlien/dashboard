@@ -4,6 +4,7 @@ import { HeaderComponent } from './header/header.component';
 import {RouterModule} from '@angular/router';
 import { LoginButtonComponent } from './ui-kit/login-button/login-button.component';
 import { ButtonComponent } from './ui-kit/button/button.component';
+import { NotFoundComponent } from './not-found/not-found/not-found.component';
 
 
 
@@ -11,7 +12,8 @@ import { ButtonComponent } from './ui-kit/button/button.component';
   declarations: [
     HeaderComponent,
     LoginButtonComponent,
-    ButtonComponent],
+    ButtonComponent,
+    NotFoundComponent],
   imports: [
     CommonModule,
     RouterModule
@@ -19,7 +21,8 @@ import { ButtonComponent } from './ui-kit/button/button.component';
   exports: [
     HeaderComponent,
     LoginButtonComponent,
-    ButtonComponent
+    ButtonComponent,
+    NotFoundComponent
   ]
 })
 export class SharedModule { }
