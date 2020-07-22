@@ -1,0 +1,198 @@
+@import "main";
+.wrapper {
+  width: 100%;
+  height: calc(100vh - 100px);
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -100px;
+}
+
+.login {
+  width: 315px;
+  margin: 0 auto;
+  height: 240px;
+  box-sizing: border-box;
+  background: url("../../../../assets/images/login-background.png") no-repeat;
+
+  &__header {
+    position: relative;
+    height: 46px;
+  }
+
+  &__back {
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    width: 50px;
+    height: 30px;
+    transform: translate(0, -50%);
+    justify-content: center;
+    align-items: center;
+    color: $textColor;
+    font-weight: bold;
+    box-sizing: border-box;
+  }
+
+  &__back-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 30px;
+    text-transform: capitalize;
+    font-family: "Helvetica Neue";
+    font-size: 0.75 * $fonts-size;
+    outline: none;
+    border-radius: 5px;
+    background: transparent;
+    border: 1px solid $textColor;
+    cursor: pointer;
+    box-shadow: 0 0 2px 0 $boxShadowLoginDark;
+  }
+
+  &__back-button:active {
+    box-shadow: inset 0 0 2px 0 $boxShadowLoginDark;
+  }
+
+  &__title {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: $lobster;
+    color: $textColor;
+    text-shadow: 0 5px 6px #d2a56d;
+    text-transform: capitalize;
+    font-size: 1.875 * $fonts-size;
+  }
+
+  &__body {
+    width: 100%;
+    height: 196px;
+    background-size: cover;
+
+  }
+
+  &__email,
+  &__password {
+    box-sizing: border-box;
+    margin: 0 auto;
+    width: 95%;
+    height: 70px;
+    margin-bottom: 7px;
+    overflow: hidden;
+  }
+
+  &__password {
+    margin-bottom: 0;
+  }
+
+  &__controls {
+    margin: 0 auto;
+    width: 99%;
+    height: 50px;
+    margin-top: -4px;
+    box-sizing: border-box;
+  }
+
+}
+
+.shelf {
+  width: 100.7%;
+  height: 100%;
+  position: relative;
+
+  &__left {
+    position: absolute;
+    left: 0;
+    top: -1px;
+    width: 15px;
+    height: 70px;
+    background: url("../../../../assets/images/shalfe-left.png") no-repeat;
+    clip-path: polygon(0 0, 100% 0, 100% 0, 100% 90%, 0% 100%, 0 100%, 0 100%, 0 0);
+    box-shadow: inset -3px 0 10px 1px $boxShadowLoginMiddle,
+    -3px 0 10px 1px $boxShadowLoginMiddle;
+    z-index: 100;
+    transform: rotateY(35deg);
+  }
+
+  &__right {
+    position: absolute;
+    right: 0;
+    top: -1px;
+    width: 15px;
+    height: 70px;
+    background: url("../../../../assets/images/shalfe-right.png") no-repeat;
+    clip-path: polygon(0 0, 100% 1%, 100% 0, 100% 100%, 100% 100%, 0 90%, 12% 100%);
+    box-shadow: inset 3px 0 10px 1px $boxShadowLoginMiddle,
+    3px 0 10px 1px $boxShadowLoginMiddle;
+    z-index: 100;
+    transform: rotateY(-35deg)
+  }
+
+  &__bottom {
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 98%;
+    margin-left: 2px;
+    height: 13px;
+    background: url("../../../../assets/images/shalfe-bottom.png") no-repeat;
+    box-shadow: inset 0 -8px 10px 1px $boxShadowLoginMiddle,
+    0 -8px 10px 1px $boxShadowLoginMiddle;
+    z-index: 10;
+    transform: rotateX(35deg);
+  }
+
+  &__input {
+    display: block;
+    width: 90.6%;
+    margin: 0 auto;
+    height: 100%;
+    border: none;
+    outline: none;
+    line-height: 3em;
+    font-size: 1.5em;
+    background: url("../../../../assets/images/shelf.png") no-repeat;
+    background-size: cover;
+    vertical-align: center;
+    font-family: $lobster;
+    box-shadow: inset 0 21px 6px 3px $boxShadowLoginLight,
+    inset 0 0 15px 6px $boxShadowLoginLight,
+    inset 0 -9px 11px 0 $boxShadowLoginLight;
+  }
+
+  input:-webkit-autofill {
+    -webkit-box-shadow:0 0 0 50px saddlebrown inset;
+    -webkit-text-fill-color: #333;
+  }
+
+  input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 50px saddlebrown inset,0 0 0 50px white inset;
+    -webkit-text-fill-color: #333;
+  }
+
+}
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+
+  &__registration {
+    width: 50%;
+    height: 100%
+  }
+
+  &__login {
+    width: 50%;
+    height: 100%
+  }
+}
+

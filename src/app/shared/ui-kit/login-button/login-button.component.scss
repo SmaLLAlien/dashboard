@@ -1,0 +1,65 @@
+@import "main";
+.button {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  background: url("../../../../assets/images/controls.png") center center;
+  background-size: cover;
+  outline: none;
+  border: none;
+  padding: 0;
+  position: relative;
+  text-transform: capitalize;
+  letter-spacing: 2px;
+  font-size: 1.4em;
+  font-family: $lobster;
+  color: $textColor;
+  text-shadow: 0 5px 6px #d2a56d;
+
+  &:hover {
+    cursor: pointer;
+    background: linear-gradient( rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url("../../../../assets/images/controls.png") center center;
+  }
+
+  &:active {
+    transform-origin: top;
+    transform: rotateX(20deg);
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.25) ), url("../../../../assets/images/controls.png");
+    background-size: cover;
+    box-shadow: inset 0 2px 1px 0 rgba(32,32,32,0.75);
+  }
+
+
+}
+
+.leftRoundBorder {
+  border-radius: 0 0 0 10px;
+}
+
+.rightRoundBorder {
+  border-radius: 0 0 10px 0;
+}
+.leftRoundBorder:active::after {
+  display: block;
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: rgba(32,32,32, 0.75);
+  clip-path: polygon(100% 0, 0% 100%, 100% 100%);
+}
+
+.rightRoundBorder:active::before {
+  display: block;
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: rgba(32,32,32, 0.75);
+  clip-path: polygon(0 0, 0% 100%, 100% 100%);
+}

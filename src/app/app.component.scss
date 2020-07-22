@@ -1,0 +1,29 @@
+.container {
+  min-height: 100vh;
+  min-width: 480px;
+  max-width: 1920px;
+  margin: 0 auto;
+  padding-top: 1px;
+  width: 100%;
+  box-sizing: border-box;
+
+  .nav {
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+    margin-left: auto;
+  }
+
+  app-header {
+    width: 100%;
+    margin-bottom: 50px;
+  }
+}
+@media all and (max-width: 980px){
+    .container {
+      .nav {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+}

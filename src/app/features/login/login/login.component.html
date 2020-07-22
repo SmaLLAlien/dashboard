@@ -1,0 +1,48 @@
+<div class="wrapper">
+  <form class="login" autocomplete="off">
+    <div class="login__body">
+      <div class="login__header">
+        <div class="login__back">
+          <button class="login__back-button" type="button">back</button>
+        </div>
+        <div class="login__title">woodsy</div>
+      </div>
+      <div class="login__body">
+        <div class="login__email">
+          <div class="shelf">
+            <div class="shelf__left"></div>
+            <input type="text" class="shelf__input">
+            <div class="shelf__right"></div>
+            <div class="shelf__bottom"></div>
+          </div>
+        </div>
+        <div class="login__password">
+          <div class="shelf">
+            <div class="shelf__left"></div>
+            <input type="password" [attr.autocomplete]="'new-password'"  class="shelf__input" #input>
+            <div class="shelf__right"></div>
+            <div class="shelf__bottom"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="login__controls">
+      <div class="controls">
+        <div class="controls__registration">
+          <app-login-button
+            [customClass]="'leftRoundBorder'"
+            [text]="'login'"
+            (clickHandler)="login($event)"
+          ></app-login-button>
+        </div>
+        <div class="controls__login">
+          <app-login-button
+            [customClass]="'rightRoundBorder'"
+            [text]="'register'"
+            (clickHandler)="registration($event)"
+          ></app-login-button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
