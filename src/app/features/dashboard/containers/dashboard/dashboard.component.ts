@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {ITodo} from '../../../../appConfig';
+import {DashboardService} from '../../services/dashboard.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,10 +9,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  todo: ITodo;
 
-  constructor() { }
+  constructor(private dashboardService: DashboardService) { }
 
   ngOnInit(): void {
   }
 
+  getTodoList(): Observable<ITodo[]> {
+    return this.dashboardService.getTodoList();
+  }
 }

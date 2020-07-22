@@ -1,5 +1,7 @@
 <div class="dashboard">
   <div class="todo">
-    <app-todo></app-todo>
+    <div class="todo__item" *ngFor="let todo of getTodoList() | async">
+      <app-todo [todo]="todo"></app-todo>
+    </div>
   </div>
 </div>
