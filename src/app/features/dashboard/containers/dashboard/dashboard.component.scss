@@ -1,13 +1,24 @@
+@import "main";
 .dashboard {
+  height: calc(100vh - 100px);
+
   .todo {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    height: calc(100vh - 100px);
 
     &__item {
       width: 480px;
       margin: 20px 20px;
     }
+
+    &__empty {
+      @include empty;
+    }
+  }
+  &__empty {
+    @include empty;
   }
 }

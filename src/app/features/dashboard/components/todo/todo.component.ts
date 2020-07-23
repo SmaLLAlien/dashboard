@@ -15,4 +15,8 @@ export class TodoComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getHost(link: string): string {
+    const object = new URL(link);
+    return object.hostname;
+  }
 }

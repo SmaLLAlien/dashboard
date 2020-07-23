@@ -11,18 +11,22 @@ import {Observable} from 'rxjs';
 })
 export class DashboardComponent implements OnInit {
   todo: ITodo;
+  todos$: Observable<ITodo[]>;
 
-  constructor(private dashboardService: DashboardService) { }
+  constructor(private dashboardService: DashboardService) {
+
+  }
 
   ngOnInit(): void {
-    // this.addTodo().subscribe();
+    // this.addTodo();
+    this.todos$ = this.getTodoList();
   }
 
   getTodoList(): Observable<ITodo[]> {
     return this.dashboardService.getTodoList();
   }
 
-  addTodo() {
-    return this.dashboardService.addTodo();
+  addTodo(): void {
+    this.dashboardService.addTodo().subscribe();
   }
 }

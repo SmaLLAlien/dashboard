@@ -1,5 +1,5 @@
 <div class="dashboard">
-  <div class="todo" *ngIf="(getTodoList() | async) as todos; else loading">
+  <div class="todo" *ngIf="(todos$ | async) as todos; else loading">
     <ng-container *ngIf="todos.length; else noTodos">
       <div class="todo__item" *ngFor="let todo of todos">
         <app-todo [todo]="todo"></app-todo>
