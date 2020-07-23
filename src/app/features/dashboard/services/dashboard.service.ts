@@ -1,18 +1,26 @@
 import { Injectable } from '@angular/core';
 import {Observable, of} from 'rxjs';
-import {ITodo} from '../../../appConfig';
+import {ITodo, URLS} from '../../../appConfig';
+import {HttpService} from '../../../core/http.service';
 
 @Injectable()
 export class DashboardService {
-  todo: ITodo =  {
+  private prefix = 'todo.json';
+  private todo: ITodo =  {
     header: 'header2',
-    description: 'description'
+    description: 'description description description description description descriptio ndescription description description description description description description descriptio ndescription description description description description description description descriptio ndescription description description description description description description descriptio ndescription description description description description description description descriptio ndescription description description description description description description descriptio ndescription ription '
   };
-  todos: ITodo[] = [{...this.todo}, {...this.todo},{...this.todo},{...this.todo},{...this.todo},{...this.todo}];
+  private todos: ITodo[] = [{...this.todo}, {...this.todo},{...this.todo},{...this.todo},{...this.todo},{...this.todo},{...this.todo},{...this.todo},{...this.todo}];
 
-  constructor() { }
+  constructor(private httpService: HttpService) { }
 
   getTodoList(): Observable<ITodo[]> {
     return of(this.todos);
+  }
+
+  addTodo() {
+    const url = URLS.todo + this.prefix;
+    const body = JSON.stringify(this.todo);
+    return this.httpService.post(url, body);
   }
 }

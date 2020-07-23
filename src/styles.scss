@@ -4,4 +4,23 @@ body {
   padding: 0;
   margin: 0;
   background: url('/assets/images/Melamine-wood-005.png');
+  scrollbar-color: $textColor $textColor;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $textColor;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b30000;
 }

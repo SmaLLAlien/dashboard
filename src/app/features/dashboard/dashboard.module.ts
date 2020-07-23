@@ -11,9 +11,9 @@ import {CommonModule} from '@angular/common';
 @NgModule({
   declarations: [DashboardComponent, TodoComponent],
   imports: [
+    CommonModule,
     SharedModule,
     DashboardRoutingModule,
-    CommonModule,
   ],
   providers: [
     DashboardService

@@ -15,9 +15,14 @@ export class DashboardComponent implements OnInit {
   constructor(private dashboardService: DashboardService) { }
 
   ngOnInit(): void {
+    // this.addTodo().subscribe();
   }
 
   getTodoList(): Observable<ITodo[]> {
     return this.dashboardService.getTodoList();
+  }
+
+  addTodo() {
+    return this.dashboardService.addTodo();
   }
 }

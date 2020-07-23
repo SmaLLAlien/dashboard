@@ -1,7 +1,19 @@
 <div class="dashboard">
-  <div class="todo">
-    <div class="todo__item" *ngFor="let todo of getTodoList() | async">
-      <app-todo [todo]="todo"></app-todo>
-    </div>
+  <div class="todo" *ngIf="(getTodoList() | async) as todos; else loading">
+    <ng-container *ngIf="todos.length; else noTodos">
+      <div class="todo__item" *ngFor="let todo of todos">
+        <app-todo [todo]="todo"></app-todo>
+      </div>
+    </ng-container>
   </div>
+  <ng-template #loading>
+    <div class="dashboard__empty">
+      Sorry. We are still loading.
+    </div>
+  </ng-template>
+  <ng-template #noTodos>
+    <div class="dashboard__empty">
+      Sorry. There are no todo yet. You can add one by click "Add todo" button
+    </div>
+  </ng-template>
 </div>
