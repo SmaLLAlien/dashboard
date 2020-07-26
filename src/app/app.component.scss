@@ -27,3 +27,13 @@
       }
     }
 }
+.spinner {
+  position: absolute;
+  width: 100%;
+  min-height: 100vh;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  z-index: 10000;
+  overflow: hidden;
+}
