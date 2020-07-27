@@ -11,3 +11,8 @@ export const enum URLS {
 export interface IServerResponse {
   [key: string]: ITodo;
 }
+
+export const VALIDATE_CONFIG = {
+  loginNameLength: 4,
+  password: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{5,}$/
+};

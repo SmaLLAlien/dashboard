@@ -1,9 +1,11 @@
 <div class="wrapper">
-  <form class="login" autocomplete="off">
+  <form class="login" autocomplete="off" [formGroup]="loginForm">
     <div class="login__body">
       <div class="login__header">
         <div class="login__back">
-          <button class="login__back-button" type="button">back</button>
+          <button class="login__back-button" type="button"
+                  (click)="clear()"
+                  *ngIf="isFormHasValue">clear</button>
         </div>
         <div class="login__title">woodsy</div>
       </div>
@@ -11,7 +13,9 @@
         <div class="login__email">
           <div class="shelf">
             <div class="shelf__left"></div>
-            <input type="text" class="shelf__input">
+            <input type="text" [ngClass]="{'shelf__error': name.touched && name.invalid}"
+                   class="shelf__input"
+                  [formControlName]="'name'">
             <div class="shelf__right"></div>
             <div class="shelf__bottom"></div>
           </div>
@@ -19,7 +23,10 @@
         <div class="login__password">
           <div class="shelf">
             <div class="shelf__left"></div>
-            <input type="password" [attr.autocomplete]="'new-password'"  class="shelf__input" #input>
+            <input type="password" [ngClass]="{'shelf__error': password.touched && password.invalid}"
+                   [attr.autocomplete]="'new-password'"
+                   class="shelf__input" #input
+                    [formControlName]="'password'">
             <div class="shelf__right"></div>
             <div class="shelf__bottom"></div>
           </div>
@@ -32,14 +39,16 @@
           <app-login-button
             [customClass]="'leftRoundBorder'"
             [text]="'login'"
-            (clickHandler)="login($event)"
+            (clickHandler)="login()"
+            [isDisabled]="loginForm.invalid"
           ></app-login-button>
         </div>
         <div class="controls__login">
           <app-login-button
             [customClass]="'rightRoundBorder'"
             [text]="'register'"
-            (clickHandler)="registration($event)"
+            (clickHandler)="registration()"
+            [isDisabled]="loginForm.invalid"
           ></app-login-button>
         </div>
       </div>
