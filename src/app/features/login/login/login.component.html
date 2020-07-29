@@ -1,4 +1,7 @@
 <div class="wrapper">
+  <div class="name__errors" *ngIf="loginForm.invalid && loginForm.touched">
+    <app-error-message [control]="name" [controlName]="'Name'"></app-error-message>
+  </div>
   <form class="login" autocomplete="off" [formGroup]="loginForm">
     <div class="login__body">
       <div class="login__header">
@@ -54,4 +57,7 @@
       </div>
     </div>
   </form>
+  <div class="password__errors" *ngIf="loginForm.invalid && loginForm.touched">
+    <app-error-message [control]="password" [controlName]="'Password'"></app-error-message>
+  </div>
 </div>
