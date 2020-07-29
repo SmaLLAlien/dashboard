@@ -1,8 +1,8 @@
 <ul class="header">
   <li class="header__item">
     <a class="header__link">
-      <div class="header__button-wrapper"
-           [routerLink]="['login']"
+      <div class="header__button-wrapper" *ngIf="!(isLogged$ | async)"
+           [routerLink]="[login]"
            [routerLinkActive]="'current'">
         <button class="header__button">Login</button>
       </div>
@@ -10,8 +10,8 @@
   </li>
   <li class="header__item">
     <a class="header__link" >
-      <div class="header__button-wrapper"
-           [routerLink]="['dashboard']"
+      <div class="header__button-wrapper" *ngIf="isLogged$ | async"
+           [routerLink]="[dashboard]"
             [routerLinkActive]="'current'">
         <button class="header__button">Dashboard</button>
       </div>

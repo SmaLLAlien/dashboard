@@ -1,6 +1,6 @@
 <div class="wrapper">
   <div class="name__errors" *ngIf="loginForm.invalid && loginForm.touched">
-    <app-error-message [control]="name" [controlName]="'Name'"></app-error-message>
+    <app-error-message [control]="email" [controlName]="'Name'"></app-error-message>
   </div>
   <form class="login" autocomplete="off" [formGroup]="loginForm">
     <div class="login__body">
@@ -16,9 +16,9 @@
         <div class="login__email">
           <div class="shelf">
             <div class="shelf__left"></div>
-            <input type="text" [ngClass]="{'shelf__error': name.touched && name.invalid}"
+            <input type="text" [ngClass]="{'shelf__error': email.touched && email.invalid}"
                    class="shelf__input"
-                  [formControlName]="'name'">
+                  [formControlName]="'email'">
             <div class="shelf__right"></div>
             <div class="shelf__bottom"></div>
           </div>

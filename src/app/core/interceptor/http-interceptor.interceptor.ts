@@ -3,22 +3,58 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpInterceptor, HttpErrorResponse, HttpResponse
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {Observable, throwError} from 'rxjs';
 import {SpinnerService} from '../spinner.service';
-import {finalize} from 'rxjs/operators';
+import {catchError, finalize, tap} from 'rxjs/operators';
+import {URLS_SERVERS} from '../../appConfig';
+import {TokenService} from '../token.service';
 
 @Injectable()
 export class HttpInterceptorInterceptor implements HttpInterceptor {
   count = 0;
 
-  constructor(private spinnerService: SpinnerService) {}
+  constructor(private spinnerService: SpinnerService,
+              private tokenService: TokenService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+    let headers;
     this.count++;
     this.spinnerService.show();
-    return next.handle(request).pipe(
+
+    switch (request.url) {
+      case URLS_SERVERS.login:
+      case URLS_SERVERS.register:
+        headers = {
+          'Content-Type': 'application/json',
+        };
+        break;
+      default:
+        headers = {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${this.tokenService.token}`,
+        };
+    }
+
+    const modifiedReq = request.clone({
+      setHeaders: headers
+    });
+
+
+    return next.handle(modifiedReq).pipe(
+      tap((event: HttpEvent<any>) => {
+        if (event instanceof HttpResponse) {
+          if (event.body && event.body.idToken) {
+            this.tokenService.token = event.body.idToken;
+
+            return event;
+          }
+        }
+      }),
+      catchError((err: HttpErrorResponse) => {
+        return throwError(err);
+      } ),
       finalize(() => {
         this.count--;
         if (!this.count) {
@@ -30,3 +66,4 @@ export class HttpInterceptorInterceptor implements HttpInterceptor {
     );
   }
 }
+

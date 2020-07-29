@@ -1,4 +1,7 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {NAVIGATION} from '../../appConfig';
+import {LoginService} from '../../core/login.service';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -7,10 +10,14 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent implements OnInit {
+  login = NAVIGATION.login;
+  dashboard = NAVIGATION.dashboard;
+  isLogged$: Subject<boolean>;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private loginService: LoginService) {
+    this.isLogged$ = this.loginService.isLoggedSubject;
   }
+
+  ngOnInit(): void {}
 
 }

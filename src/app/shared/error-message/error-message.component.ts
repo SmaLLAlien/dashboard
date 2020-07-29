@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {AbstractControl} from '@angular/forms';
-import {ERROR_MESSAGES, ErrorMessages} from '../../appConfig';
+import {ERROR_MESSAGES, IErrorMessages} from '../../appConfig';
 
 @Component({
   selector: 'app-error-message',
@@ -10,14 +10,12 @@ import {ERROR_MESSAGES, ErrorMessages} from '../../appConfig';
 export class ErrorMessageComponent implements OnInit {
   @Input() control: AbstractControl;
   @Input() controlName: string = '';
-  errorMessage: ErrorMessages = ERROR_MESSAGES;
+  errorMessage: IErrorMessages = ERROR_MESSAGES;
   keys: string[] = Object.keys(this.errorMessage);
 
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.control);
-    console.log(this.controlName);
   }
 
 }

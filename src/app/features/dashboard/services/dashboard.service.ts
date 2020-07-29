@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {Observable, of} from 'rxjs';
-import {IServerResponse, ITodo, URLS} from '../../../appConfig';
+import {Observable} from 'rxjs';
+import {IServerResponse, ITodo, URLS_SERVERS} from '../../../appConfig';
 import {HttpService} from '../../../core/http.service';
 import {map} from 'rxjs/operators';
 
@@ -12,12 +12,12 @@ export class DashboardService {
     description: 'description description description description description descriptio ndescription description description description description description description descriptio ndescription description description description description description description descriptio ndescription description description description description description description descriptio ndescription description description',
     link: 'https://metanit.com/web/angular2/8.4.php'
   };
-  private todos: ITodo[] = [{...this.todo}, {...this.todo},{...this.todo},{...this.todo},{...this.todo},{...this.todo},{...this.todo},{...this.todo},{...this.todo}];
+  // private todos: ITodo[] = [{...this.todo}, {...this.todo},{...this.todo},{...this.todo},{...this.todo},{...this.todo},{...this.todo},{...this.todo},{...this.todo}];
 
   constructor(private httpService: HttpService) { }
 
   getTodoList(): Observable<ITodo[]> {
-    const url = URLS.todo + this.prefix;
+    const url = URLS_SERVERS.todo + this.prefix;
     return this.httpService.get(url).pipe(
       map((response: IServerResponse) => {
         const keys = Object.keys(response);
@@ -28,7 +28,7 @@ export class DashboardService {
   }
 
   addTodo(): Observable<{ name: string }> {
-    const url = URLS.todo + this.prefix;
+    const url = URLS_SERVERS.todo + this.prefix;
     const body = JSON.stringify(this.todo);
     return this.httpService.post(url, body);
   }

@@ -3,6 +3,7 @@ import {HttpService} from './http.service';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {HttpInterceptorInterceptor} from './interceptor/http-interceptor.interceptor';
 import {SpinnerService} from './spinner.service';
+import {TokenService} from './token.service';
 
 export abstract class EnsureImportedOnceModule {
   protected constructor(targetModule: any) {
@@ -19,6 +20,7 @@ export abstract class EnsureImportedOnceModule {
   providers: [
     HttpService,
     SpinnerService,
+    TokenService,
     {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorInterceptor, multi: true}
   ]
 })
