@@ -1,0 +1,8 @@
+<div *ngIf="(control.errors && control.touched)" class="validators">
+  <p *ngFor='let key of keys' class="validators__items">
+    <span *ngIf='control.errors[key] && key !== "maxlength"' class="validators__item">
+      <span *ngIf="controlName">{{controlName}} </span><span>{{errorMessage[key]}}</span></span>
+    <span *ngIf='control.errors[key] && key === "maxlength"' class="item">You cannot enter more than {{control.errors[key].requiredLength}} symbols to
+      <span *ngIf="controlName">{{controlName}}</span></span>
+  </p>
+</div>

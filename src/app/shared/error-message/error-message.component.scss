@@ -1,0 +1,33 @@
+@import "src/styles/main";
+.validators {
+  color: darken($textColor, 50%);
+  font-size: $fonts-size * 1.1;
+  text-shadow: $textShadow;
+  width: 315px;
+  height: 90px;
+  background: url("/assets/images/errors.png") no-repeat center center;
+  background-size: cover;
+  margin-top: -100px;
+  padding: 0 20px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__items {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__item {
+    align-self: center;
+    text-align: center;
+
+    span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
