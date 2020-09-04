@@ -3,9 +3,10 @@
   <div class="todo__corner todo__corner-right"></div>
   <div class="todo__content">
     <h2 class="todo__header">{{todo.header ? todo.header : 'TODO'}}</h2>
+    <p class="todo__edit" (click)="edit()">Edit</p>
     <p *ngIf="todo.description" class="todo__description">{{todo.description}}</p>
-    <div class="todo__link" *ngIf="todo.link">
-      <a [attr.href]="todo.link">{{getHost(todo.link)}}</a>
+    <div class="todo__link" *ngIf="todo.links.length">
+      <a [attr.href]="link" *ngFor="let link of todo.links" >{{getHost(link)}}</a>
     </div>
   </div>
 </div>

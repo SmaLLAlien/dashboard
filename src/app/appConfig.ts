@@ -1,9 +1,10 @@
 import {environment} from '../environments/environment';
 
 export interface ITodo {
+  id: string;
   header: string;
   description: string;
-  link: string;
+  links: string[];
 }
 
 export const enum URLS_SERVERS {
@@ -24,6 +25,7 @@ export const VALIDATE_CONFIG = {
 export enum ERROR_MESSAGES {
   required = 'field is required!',
   minlength = 'should have minimum 4 characters',
+  maxlength = 'maximum 255 characters',
   pattern = 'should have min 5 characters, 1 digit, 1 upper, 1 lowercase characters'
 }
 
@@ -32,7 +34,7 @@ export  interface IErrorMessages {
   // email: string;
   pattern: string;
   minlength: string;
-  // maxlength: string;
+  maxlength: string;
 }
 
 export const API_KEY = environment.key;
@@ -48,7 +50,8 @@ export interface IAuthResponse {
 
 export enum NAVIGATION {
   dashboard= 'dashboard',
-  login = 'login'
+  login = 'login',
+  edit = 'edit',
 }
 export const TOKEN_EXPIRATION = 3600 * 1000;
 export const TOKEN = 'token';

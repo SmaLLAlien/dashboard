@@ -1,0 +1,37 @@
+<form [formGroup]="todoForm" class="form">
+  <h2 *ngIf="!isEdit">create new todo</h2>
+  <h2 *ngIf="isEdit">edit todo</h2>
+  <div class="form__header">
+    <label for="header" class="form__label">Header:</label>
+    <input type="text" formControlName="header" placeholder="header" id="header" class="form__input"
+    [ngClass]="{'form__input--error': header.invalid && header.touched}">
+  </div>
+  <div class="form__header-errors"><app-error-message [control]="header" [controlName]="'Header'"></app-error-message></div>
+ <div class="form__description">
+   <label for="description" class="form__label">Description:</label>
+   <textarea name="description"
+            formControlName="description"
+             id="description"
+             placeholder="description"
+             class="form__input form__area"
+             [ngClass]="{'form__input--error': description.invalid && description.touched}"></textarea>
+ </div>
+  <app-error-message [control]="description" [controlName]="'Description'"></app-error-message>
+  <div class="form__link-controls">
+    <app-button (clicked)="addLink()">Add link</app-button>
+    <app-button [isDisable]="!links.length" (clicked)="removeLink()">Remove link</app-button>
+  </div>
+  <div class="form__link" formArrayName="links">
+    <label for="link" class="form__label">Link:</label>
+    <input type="url" [formControlName]="i" id="link" placeholder="link" class="form__input" *ngFor="let link of links.controls; let i=index">
+  </div>
+  <div class="form__controls">
+    <div class="form__save">
+      <app-button *ngIf="!isEdit" (clicked)="save()" [isDisable]="!isValueChanged || todoForm.invalid">Save</app-button>
+      <app-button *ngIf="isEdit" (clicked)="save()" [isDisable]="!isValueChanged || todoForm.invalid">Edit</app-button>
+    </div>
+    <div class="form__cancel">
+      <app-button (clicked)="cancel()">Cancel</app-button>
+    </div>
+  </div>
+</form>

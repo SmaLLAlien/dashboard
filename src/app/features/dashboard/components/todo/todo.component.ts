@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ITodo} from '../../../../appConfig';
 
 @Component({
@@ -7,16 +7,20 @@ import {ITodo} from '../../../../appConfig';
   styleUrls: ['./todo.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TodoComponent implements OnInit {
+export class TodoComponent implements OnInit{
   @Input() todo: ITodo;
+  @Output() editing: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 
   getHost(link: string): string {
     const object = new URL(link);
     return object.hostname;
+  }
+
+  edit(): void {
+    this.editing.emit(this.todo.id);
+  }
+
+  ngOnInit(): void {
   }
 }

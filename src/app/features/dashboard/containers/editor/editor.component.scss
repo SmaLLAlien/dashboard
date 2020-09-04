@@ -1,0 +1,78 @@
+@import "src/styles/main";
+.form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  color: $textColor;
+  font-family: Lobster;
+  font-size: 1.2em;
+
+  h2 {
+    text-transform: uppercase;
+  }
+
+  &__header,
+  &__description,
+  &__link {
+    width: 50%;
+    margin-bottom: 20px;
+  }
+
+  &__label {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  &__input {
+    width: 100%;
+    min-width: 480px;
+    outline: none;
+    border: none;
+    padding: 10px;
+    resize: vertical;
+    font-size: 1.2em;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    background: url("../../../../../assets/images/ui_background.png");
+    border-radius: 5px;
+    box-shadow: inset 0 0 5px 0 rgba(0,0,0,0.75);
+  }
+
+  &__input--error {
+    box-shadow: inset 0 0 6px 6px rgba(255,0,0,0.2)
+  }
+
+  &__area {
+    height: 200px;
+  }
+
+  &__link-controls {
+    display: flex;
+    width: 50%;
+    justify-content: center;
+    height: 30px;
+
+    app-button {
+      width: 30%;
+      margin-right: 20px;
+    }
+  }
+
+  &__controls {
+      width: 50%;
+    height: 50px;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  &__save,
+  &__cancel{
+    width: 30%;
+  }
+
+  app-error-message {
+    display: block;
+  }
+
+}

@@ -1,7 +1,8 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {ITodo} from '../../../../appConfig';
+import {ITodo, NAVIGATION} from '../../../../appConfig';
 import {DashboardService} from '../../services/dashboard.service';
 import {Observable} from 'rxjs';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +14,7 @@ export class DashboardComponent implements OnInit {
   todo: ITodo;
   todos$: Observable<ITodo[]>;
 
-  constructor(private dashboardService: DashboardService) {
+  constructor(private dashboardService: DashboardService, private router: Router, private route: ActivatedRoute) {
 
   }
 
@@ -27,6 +28,10 @@ export class DashboardComponent implements OnInit {
   }
 
   addTodo(): void {
-    this.dashboardService.addTodo().subscribe();
+    // this.dashboardService.addTodo().subscribe();
+  }
+
+  openEdit(id: string): void {
+    this.router.navigate([`${NAVIGATION.edit}/${id}`], {relativeTo: this.route});
   }
 }

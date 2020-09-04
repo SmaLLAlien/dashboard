@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {AbstractControl} from '@angular/forms';
 import {ERROR_MESSAGES, IErrorMessages} from '../../appConfig';
 
@@ -7,15 +7,9 @@ import {ERROR_MESSAGES, IErrorMessages} from '../../appConfig';
   templateUrl: './error-message.component.html',
   styleUrls: ['./error-message.component.scss']
 })
-export class ErrorMessageComponent implements OnInit {
+export class ErrorMessageComponent {
   @Input() control: AbstractControl;
   @Input() controlName: string = '';
   errorMessage: IErrorMessages = ERROR_MESSAGES;
   keys: string[] = Object.keys(this.errorMessage);
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }

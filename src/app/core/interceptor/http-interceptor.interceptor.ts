@@ -3,7 +3,7 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor, HttpErrorResponse, HttpResponse
+  HttpInterceptor, HttpErrorResponse, HttpResponse, HttpParams
 } from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {SpinnerService} from '../spinner.service';
@@ -20,6 +20,7 @@ export class HttpInterceptorInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     let headers;
+    let params;
     this.count++;
     this.spinnerService.show();
 
@@ -33,12 +34,15 @@ export class HttpInterceptorInterceptor implements HttpInterceptor {
       default:
         headers = {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${this.tokenService.token}`,
+          Authorization: `${this.tokenService.token}`,
         };
     }
 
     const modifiedReq = request.clone({
-      setHeaders: headers
+      setHeaders: headers,
+      // params: new HttpParams().set(
+      //   'auth', this.tokenService.token
+      // )
     });
 
 

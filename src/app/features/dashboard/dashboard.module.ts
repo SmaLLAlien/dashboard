@@ -5,18 +5,23 @@ import { TodoComponent } from './components/todo/todo.component';
 import {DashboardRoutingModule} from './dashboard-routing.module';
 import {DashboardService} from './services/dashboard.service';
 import {CommonModule} from '@angular/common';
+import { EditorComponent } from './containers/editor/editor.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {EditorService} from './services/editor.service';
 
 
 
 @NgModule({
-  declarations: [DashboardComponent, TodoComponent],
+  declarations: [DashboardComponent, TodoComponent, EditorComponent],
   imports: [
     CommonModule,
     SharedModule,
     DashboardRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [
-    DashboardService
+    DashboardService,
+    EditorService
   ]
 })
 export class DashboardModule { }
