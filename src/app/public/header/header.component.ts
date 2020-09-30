@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {NAVIGATION} from '../../appConfig';
 import {LoginService} from '../../core/login.service';
 import {Subject} from 'rxjs';
@@ -9,15 +9,13 @@ import {Subject} from 'rxjs';
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   login = NAVIGATION.login;
   dashboard = NAVIGATION.dashboard;
+  add = `${NAVIGATION.dashboard}/${NAVIGATION.new}`;
   isLogged$: Subject<boolean>;
 
   constructor(private loginService: LoginService) {
     this.isLogged$ = this.loginService.isLoggedSubject;
   }
-
-  ngOnInit(): void {}
-
 }

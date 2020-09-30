@@ -1,8 +1,8 @@
-import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ITodo, NAVIGATION} from '../../../../appConfig';
-import {switchMap, takeWhile, tap} from 'rxjs/operators';
+import {takeWhile, tap} from 'rxjs/operators';
 import {EditorService} from '../../services/editor.service';
 
 @Component({
@@ -27,7 +27,16 @@ export class EditorComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.todoForm = this.formInit();
     this.initSubscription();
-
+    this.id = this.route.snapshot.params.id;
+    if (this.id) {
+      this.isEdit = true;
+      this.editorService.getTodo(this.id)
+        .subscribe(data => {
+          this.todo = data;
+          this.todoForm.patchValue(this.todo);
+          this.createLinksArray(this.todo.links);
+        });
+    }
   }
 
   formInit() {
@@ -54,18 +63,18 @@ export class EditorComponent implements OnInit, OnDestroy {
       )
       .subscribe(() => this.isValueChanged = true);
 
-    this.route.params
-      .pipe(
-        takeWhile(() => this.isAlive),
-        tap((params) => this.isEdit = !!params),
-        tap((params) => this.id = params.id),
-        switchMap(params => this.editorService.getTodo(params.id))
-      )
-      .subscribe(data => {
-        this.todo = data;
-        this.todoForm.patchValue(this.todo);
-        this.createLinksArray(this.todo.links);
-      });
+    // this.route.params
+    //   .pipe(
+    //     takeWhile(() => this.isAlive),
+    //     tap((params) => this.isEdit = !!params),
+    //     tap((params) => this.id = params.id),
+    //     switchMap(params => this.editorService.getTodo(params.id))
+    //   )
+    //   .subscribe(data => {
+    //     this.todo = data;
+    //     this.todoForm.patchValue(this.todo);
+    //     this.createLinksArray(this.todo.links);
+    //   });
   }
 
   get links(): FormArray {
@@ -80,11 +89,23 @@ export class EditorComponent implements OnInit, OnDestroy {
     return this.todoForm.get('description') as FormControl;
   }
 
-  save(): void {
+  edit(): void {
     if (this.todoForm.invalid) {
       return;
     }
-    this.editorService.save(this.todoForm.value, this.id)
+    this.editorService.edit(this.todoForm.value, this.id)
+      .pipe(
+        tap(() => this.router.navigate([NAVIGATION.dashboard]))
+      )
+      .subscribe();
+  }
+
+  save() {
+    if (this.todoForm.invalid) {
+      return;
+    }
+
+    this.editorService.save(this.todoForm.value)
       .pipe(
         tap(() => this.router.navigate([NAVIGATION.dashboard]))
       )

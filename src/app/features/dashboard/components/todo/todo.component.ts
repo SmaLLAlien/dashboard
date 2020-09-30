@@ -7,9 +7,10 @@ import {ITodo} from '../../../../appConfig';
   styleUrls: ['./todo.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TodoComponent implements OnInit{
+export class TodoComponent implements OnInit {
   @Input() todo: ITodo;
   @Output() editing: EventEmitter<string> = new EventEmitter<string>();
+  @Output() deleting: EventEmitter<string> = new EventEmitter<string>();
 
 
   getHost(link: string): string {
@@ -22,5 +23,9 @@ export class TodoComponent implements OnInit{
   }
 
   ngOnInit(): void {
+  }
+
+  delete() {
+    this.deleting.emit(this.todo.id);
   }
 }

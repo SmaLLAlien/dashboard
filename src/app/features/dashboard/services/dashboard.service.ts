@@ -28,6 +28,11 @@ export class DashboardService {
     // return of(this.todos)
   }
 
+  deleteTodo(id: string) {
+    const url = `https://dashboard-70225.firebaseio.com/todo/${id}.json`;
+    return this.httpService.delete(url);
+  }
+
   // addTodo(): Observable<{ name: string }> {
   //   const url = URLS_SERVERS.todo + this.prefix;
   //   const body = JSON.stringify(this.todo);

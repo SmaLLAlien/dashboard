@@ -10,6 +10,7 @@ const routes: Routes = [
   {
     path: '', component: DashboardComponent, canActivate: [AuthenticationGuard]
   },
+  {path: `${NAVIGATION.new}`, component: EditorComponent},
   {path: `${NAVIGATION.edit}/:id`, component: EditorComponent}
 ];
 

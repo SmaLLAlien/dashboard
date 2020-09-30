@@ -12,8 +12,13 @@ export class EditorService {
     return this.http.get(`https://dashboard-70225.firebaseio.com/todo/${id}.json`);
   }
 
-  save(todo: ITodo, id: string): Observable<ITodo> {
+  edit(todo: ITodo, id: string): Observable<ITodo> {
     const body = JSON.stringify(todo);
     return this.http.put(`https://dashboard-70225.firebaseio.com/todo/${id}.json`, body);
+  }
+
+  save(todo: ITodo): Observable<ITodo> {
+    const body = JSON.stringify(todo);
+    return this.http.post(`https://dashboard-70225.firebaseio.com/todo.json`, body);
   }
 }

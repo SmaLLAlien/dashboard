@@ -9,9 +9,15 @@
     </a>
   </li>
   <li class="header__item">
-    <a class="header__link" >
-      <div class="header__button-wrapper" *ngIf="isLogged$ | async"
+    <a class="header__link" *ngIf="isLogged$ | async">
+      <div class="header__button-wrapper"
+           [routerLink]="[add]"
+           [routerLinkActive]="'current'">
+        <button class="header__button">Add todo</button>
+      </div>
+      <div class="header__button-wrapper"
            [routerLink]="[dashboard]"
+           [routerLinkActiveOptions]="{exact:true}"
             [routerLinkActive]="'current'">
         <button class="header__button">Dashboard</button>
       </div>

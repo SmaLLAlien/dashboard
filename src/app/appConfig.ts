@@ -52,6 +52,7 @@ export enum NAVIGATION {
   dashboard= 'dashboard',
   login = 'login',
   edit = 'edit',
+  new = 'new',
 }
 export const TOKEN_EXPIRATION = 3600 * 1000;
 export const TOKEN = 'token';
