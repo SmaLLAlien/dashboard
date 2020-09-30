@@ -10,6 +10,7 @@ import {tap} from 'rxjs/operators';
 })
 export class LoginService {
   isLoggedSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  isAdmin = false;
 
   constructor(private httpService: HttpService,
               private tokenService: TokenService) {
@@ -34,6 +35,10 @@ export class LoginService {
       .pipe(
         tap(() => {
           this.isLoggedSubject.next(true);
+        }),
+        tap((data) => {
+          this.isAdmin =  data.email = !!'belvlad@gmail.com';
+
         })
       );
   }

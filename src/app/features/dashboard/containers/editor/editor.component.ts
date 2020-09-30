@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ITodo, NAVIGATION} from '../../../../appConfig';
 import {takeWhile, tap} from 'rxjs/operators';
 import {EditorService} from '../../services/editor.service';
+import {LoginService} from '../../../../core/login.service';
 
 @Component({
   selector: 'app-editor',
@@ -14,6 +15,8 @@ export class EditorComponent implements OnInit, OnDestroy {
   todoForm: FormGroup;
   isValueChanged = false;
   isEdit = false;
+  isAdmin = this.loginService.isAdmin;
+
   private id: string;
   private isAlive = true;
   private todo: ITodo;
@@ -21,7 +24,8 @@ export class EditorComponent implements OnInit, OnDestroy {
   constructor(private fb: FormBuilder,
               private router: Router,
               private route: ActivatedRoute,
-              private editorService: EditorService) {
+              private editorService: EditorService,
+              private loginService: LoginService) {
   }
 
   ngOnInit(): void {
@@ -62,19 +66,6 @@ export class EditorComponent implements OnInit, OnDestroy {
         takeWhile(() => this.isAlive)
       )
       .subscribe(() => this.isValueChanged = true);
-
-    // this.route.params
-    //   .pipe(
-    //     takeWhile(() => this.isAlive),
-    //     tap((params) => this.isEdit = !!params),
-    //     tap((params) => this.id = params.id),
-    //     switchMap(params => this.editorService.getTodo(params.id))
-    //   )
-    //   .subscribe(data => {
-    //     this.todo = data;
-    //     this.todoForm.patchValue(this.todo);
-    //     this.createLinksArray(this.todo.links);
-    //   });
   }
 
   get links(): FormArray {

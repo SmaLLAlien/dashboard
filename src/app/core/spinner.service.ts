@@ -6,9 +6,6 @@ export class SpinnerService {
   private spinnerSubject: BehaviorSubject<boolean> = new BehaviorSubject(false);
   spinnerListener = this.spinnerSubject.asObservable();
 
-  constructor() {
-  }
-
   show() {
     this.spinnerSubject.next(true);
   }

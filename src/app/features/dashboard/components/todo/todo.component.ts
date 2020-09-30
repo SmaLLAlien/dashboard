@@ -9,6 +9,7 @@ import {ITodo} from '../../../../appConfig';
 })
 export class TodoComponent implements OnInit {
   @Input() todo: ITodo;
+  @Input() isAdmin: boolean = false;
   @Output() editing: EventEmitter<string> = new EventEmitter<string>();
   @Output() deleting: EventEmitter<string> = new EventEmitter<string>();
 
@@ -26,6 +27,10 @@ export class TodoComponent implements OnInit {
   }
 
   delete() {
+    if (!this.isAdmin) {
+      alert('Sorry, you are not allowed todo this action');
+      // return;
+    }
     this.deleting.emit(this.todo.id);
   }
 }

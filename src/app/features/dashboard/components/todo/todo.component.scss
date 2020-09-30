@@ -7,12 +7,24 @@
   position: relative;
   border-radius: 5px;
   box-shadow: 0 0 10px 2px rgba(0,0,0,0.75);
+  transition: all 0.5s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 
   &__edit {
     position: absolute;
     right: 70px;
     top: -10px;
     cursor: pointer;
+  }
+
+  &__delete {
+    position: absolute;
+    top: -10px;
+    cursor: pointer;
+    left: 70px;
   }
 
   &__corner {
