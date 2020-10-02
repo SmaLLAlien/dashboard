@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ITodo} from '../../../../appConfig';
+import {ITodo, NOT_ALLOWED_ACTION} from '../../../../appConfig';
 
 @Component({
   selector: 'app-todo',
@@ -28,8 +28,8 @@ export class TodoComponent implements OnInit {
 
   delete() {
     if (!this.isAdmin) {
-      alert('Sorry, you are not allowed todo this action');
-      // return;
+      alert(NOT_ALLOWED_ACTION);
+      return;
     }
     this.deleting.emit(this.todo.id);
   }

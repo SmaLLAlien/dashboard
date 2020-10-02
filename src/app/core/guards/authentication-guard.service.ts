@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router} from '@angular/router';
-import { Observable } from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {LoginService} from '../login.service';
-import {NAVIGATION} from '../../appConfig';
+import {ADMIN, API_KEY, NAVIGATION, ROLES, URLS_SERVERS} from '../../appConfig';
+import {TokenService} from '../token.service';
+import {HttpService} from '../http.service';
+import {catchError, map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +13,8 @@ import {NAVIGATION} from '../../appConfig';
 export class AuthenticationGuard implements CanActivate {
 
   constructor(private loginService: LoginService,
+              private tokenService: TokenService,
+              private httpService: HttpService,
               private router: Router) {}
 
   canActivate(
@@ -19,11 +24,42 @@ export class AuthenticationGuard implements CanActivate {
     const isLogged = this.loginService.isLoggedSubject.getValue();
 
     if (isLogged) {
-      return true;
+      return this.getRole();
     }
 
     this.router.navigate([`${NAVIGATION.login}`]);
     return false;
+  }
+
+  getRole() {
+    const token = JSON.parse(this.tokenService.token);
+    const body = JSON.stringify({idToken: token});
+    if (!this.loginService.role) {
+      return this.httpService.post(`${URLS_SERVERS.useInfo}${API_KEY}`, body).
+      pipe(
+        map(data => {
+          return this.checkRole(data.users[0].email);
+        }),
+        catchError(err => {
+          console.log(err, 'error user');
+          this.loginService.isLoggedSubject.next(false);
+          this.router.navigate([`${NAVIGATION.login}`]);
+          return of(false);
+        })
+      );
+    } else {
+      return true;
+    }
+  }
+
+  checkRole(email) {
+    if (email.includes(ADMIN)) {
+      this.loginService.role = ROLES.admin;
+    } else {
+      this.loginService.role = ROLES.user;
+      return true;
+    }
+    return true;
   }
 
 }

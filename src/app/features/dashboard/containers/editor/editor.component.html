@@ -28,7 +28,7 @@
   <div class="form__controls">
     <div class="form__save">
       <app-button *ngIf="!isEdit" (clicked)="save()" [isDisable]="!isValueChanged || todoForm.invalid">Save</app-button>
-      <app-button *ngIf="isEdit" (clicked)="edit()" [isDisable]="!isValueChanged || todoForm.invalid || !isAdmin">Edit</app-button>
+      <app-button *ngIf="isEdit" (clicked)="edit()" [isDisable]="!isValueChanged || todoForm.invalid">Edit</app-button>
     </div>
     <div class="form__cancel">
       <app-button (clicked)="cancel()">Cancel</app-button>

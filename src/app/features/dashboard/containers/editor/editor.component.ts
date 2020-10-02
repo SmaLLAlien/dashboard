@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ITodo, NAVIGATION} from '../../../../appConfig';
+import {ITodo, NAVIGATION, NOT_ALLOWED_ACTION, ROLES} from '../../../../appConfig';
 import {takeWhile, tap} from 'rxjs/operators';
 import {EditorService} from '../../services/editor.service';
 import {LoginService} from '../../../../core/login.service';
@@ -15,7 +15,7 @@ export class EditorComponent implements OnInit, OnDestroy {
   todoForm: FormGroup;
   isValueChanged = false;
   isEdit = false;
-  isAdmin = this.loginService.isAdmin;
+  private isAdmin = this.loginService.role === ROLES.admin;
 
   private id: string;
   private isAlive = true;
@@ -24,8 +24,8 @@ export class EditorComponent implements OnInit, OnDestroy {
   constructor(private fb: FormBuilder,
               private router: Router,
               private route: ActivatedRoute,
-              private editorService: EditorService,
-              private loginService: LoginService) {
+              private loginService: LoginService,
+              private editorService: EditorService) {
   }
 
   ngOnInit(): void {
@@ -84,6 +84,10 @@ export class EditorComponent implements OnInit, OnDestroy {
     if (this.todoForm.invalid) {
       return;
     }
+    if (!this.isAdmin) {
+      alert(NOT_ALLOWED_ACTION);
+      return;
+    }
     this.editorService.edit(this.todoForm.value, this.id)
       .pipe(
         tap(() => this.router.navigate([NAVIGATION.dashboard]))
@@ -93,6 +97,10 @@ export class EditorComponent implements OnInit, OnDestroy {
 
   save() {
     if (this.todoForm.invalid) {
+      return;
+    }
+    if (!this.isAdmin) {
+      alert(NOT_ALLOWED_ACTION);
       return;
     }
 

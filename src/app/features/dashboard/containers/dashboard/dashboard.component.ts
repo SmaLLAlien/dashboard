@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {ITodo, NAVIGATION} from '../../../../appConfig';
+import {ITodo, NAVIGATION, ROLES} from '../../../../appConfig';
 import {DashboardService} from '../../services/dashboard.service';
 import {Observable} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -15,12 +15,12 @@ import {LoginService} from '../../../../core/login.service';
 export class DashboardComponent implements OnInit {
   todo: ITodo;
   todos$: Observable<ITodo[]>;
-  isAdmin = this.loginService.isAdmin;
+  isAdmin = this.loginService.role === ROLES.admin;
 
   constructor(private dashboardService: DashboardService,
               private router: Router,
-              private route: ActivatedRoute,
-              private loginService: LoginService) {
+              private loginService: LoginService,
+              private route: ActivatedRoute) {
 
   }
 

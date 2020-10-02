@@ -2,7 +2,7 @@
   <div class="todo" *ngIf="(todos$ | async) as todos; else loading">
     <ng-container *ngIf="todos.length; else noTodos">
       <div class="todo__item" *ngFor="let todo of todos">
-        <app-todo [isAdmin]="isAdmin" [todo]="todo" (editing)="openEdit($event)" (deleting)="delete($event)"></app-todo>
+        <app-todo [isAdmin]='isAdmin' [todo]="todo" (editing)="openEdit($event)" (deleting)="delete($event)"></app-todo>
       </div>
     </ng-container>
   </div>

@@ -11,6 +11,7 @@ export const enum URLS_SERVERS {
   todo = 'https://dashboard-70225.firebaseio.com/',
   register = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=',
   login = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=',
+  useInfo = 'https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=',
 }
 
 export interface IServerResponse {
@@ -38,6 +39,12 @@ export  interface IErrorMessages {
 }
 
 export const API_KEY = environment.key;
+export const ADMIN = 'bb';
+
+export enum ROLES {
+  admin = 'admin',
+  user = 'user'
+}
 
 export interface IAuthResponse {
   idToken:	string;
@@ -56,4 +63,7 @@ export enum NAVIGATION {
 }
 export const TOKEN_EXPIRATION = 3600 * 1000;
 export const TOKEN = 'token';
+export const REFRESH_TOKEN = 'refreshToken';
 export const LOGIN_TIME = 'time';
+
+export const NOT_ALLOWED_ACTION = 'Sorry, this action only for admin';

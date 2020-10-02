@@ -3,7 +3,7 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor, HttpErrorResponse, HttpResponse, HttpParams
+  HttpInterceptor, HttpErrorResponse, HttpResponse
 } from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {SpinnerService} from '../spinner.service';
@@ -14,13 +14,13 @@ import {TokenService} from '../token.service';
 @Injectable()
 export class HttpInterceptorInterceptor implements HttpInterceptor {
   count = 0;
-
+  private inProgress: boolean = false;
   constructor(private spinnerService: SpinnerService,
               private tokenService: TokenService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+
     let headers;
-    let params;
     this.count++;
     this.spinnerService.show();
 
@@ -45,18 +45,30 @@ export class HttpInterceptorInterceptor implements HttpInterceptor {
       // )
     });
 
+    if (this.tokenService.tokenExpired && !this.inProgress) {
+      console.log(2);
+      this.updateToken();
+    }
+    console.log(3);
 
     return next.handle(modifiedReq).pipe(
       tap((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
           if (event.body && event.body.idToken) {
             this.tokenService.token = event.body.idToken;
-
-            return event;
           }
+
+          if (event.body && event.body.refreshToken) {
+            this.tokenService.refreshToken = event.body.refreshToken;
+          }
+          return event;
         }
       }),
       catchError((err: HttpErrorResponse) => {
+        const {error} = err;
+        if (error.error && error.error.message === 'INVALID_ID_TOKEN') {
+          console.log(error);
+        }
         return throwError(err);
       } ),
       finalize(() => {
@@ -68,6 +80,19 @@ export class HttpInterceptorInterceptor implements HttpInterceptor {
         }
       })
     );
+  }
+
+  updateToken() {
+    this.inProgress = true;
+    if (this.tokenService.refreshToken) {
+      this.tokenService.updateToken().subscribe((response) => {
+        this.tokenService.token = response.id_token;
+        this.tokenService.refreshToken = response.refresh_token;
+
+        this.inProgress = false;
+      });
+    }
+
   }
 }
 
