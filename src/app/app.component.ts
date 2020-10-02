@@ -1,6 +1,6 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {SpinnerService} from './core/spinner.service';
-import {Observable} from 'rxjs';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { SpinnerService } from './core/spinner.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -9,15 +9,12 @@ import {Observable} from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit {
-  title = 'dashboard';
+  title: string = 'dashboard';
   isLoading$: Observable<boolean>;
 
-  constructor(private spinnerService: SpinnerService) {
-  }
+  constructor(private spinnerService: SpinnerService) {}
 
   ngOnInit(): void {
     this.isLoading$ = this.spinnerService.spinnerListener;
   }
-
-
 }

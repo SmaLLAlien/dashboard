@@ -1,6 +1,6 @@
-import {Component, Input} from '@angular/core';
-import {AbstractControl} from '@angular/forms';
-import {ERROR_MESSAGES, IErrorMessages} from '../../appConfig';
+import { Component, Input } from '@angular/core';
+import { AbstractControl } from '@angular/forms';
+import { ERROR_MESSAGES, IErrorMessages } from '../../appConfig';
 
 @Component({
   selector: 'app-error-message',

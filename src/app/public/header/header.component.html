@@ -1,7 +1,7 @@
 <ul class="header">
   <li class="header__item">
     <a class="header__link">
-      <div class="header__button-wrapper" *ngIf="!(isLogged$ | async)"
+      <div class="header__button-wrapper" *ngIf="(isLogged$ | async) === false"
            [routerLink]="[login]"
            [routerLinkActive]="'current'">
         <button class="header__button">Login</button>

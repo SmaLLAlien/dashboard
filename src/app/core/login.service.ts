@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import {HttpService} from './http.service';
-import {API_KEY, IAuthResponse, URLS_SERVERS} from '../appConfig';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {TokenService} from './token.service';
-import {tap} from 'rxjs/operators';
+import { HttpService } from './http.service';
+import { API_KEY, IAuthResponse, URLS_SERVERS } from '../appConfig';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { TokenService } from './token.service';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -17,11 +17,11 @@ export class LoginService {
     this.isLoggedSubject.next(!!this.tokenService.token);
   }
 
-  signUp(email, password): Observable<IAuthResponse> {
+  signUp(email: string, password: string): Observable<IAuthResponse> {
     return this.authorizationHandler(URLS_SERVERS.register, email, password);
   }
 
-  login(email, password): Observable<IAuthResponse> {
+  login(email: string, password: string): Observable<IAuthResponse> {
     return this.authorizationHandler(URLS_SERVERS.login, email, password);
   }
 

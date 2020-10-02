@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import {Observable} from 'rxjs';
-import {IServerResponse, ITodo, URLS_SERVERS} from '../../../appConfig';
-import {HttpService} from '../../../core/http.service';
-import {map} from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { IServerResponse, ITodo, URLS_SERVERS } from '../../../appConfig';
+import { HttpService } from '../../../core/http.service';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class DashboardService {
-  private prefix = 'todo.json';
+  private prefix: string = 'todo.json';
 
   constructor(private httpService: HttpService) { }
 
@@ -20,7 +20,7 @@ export class DashboardService {
     );
   }
 
-  deleteTodo(id: string) {
+  deleteTodo(id: string): Observable<any> {
     const url = `https://dashboard-70225.firebaseio.com/todo/${id}.json`;
     return this.httpService.delete(url);
   }

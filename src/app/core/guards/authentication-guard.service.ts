@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router} from '@angular/router';
-import {Observable, of} from 'rxjs';
-import {LoginService} from '../login.service';
-import {ADMIN, API_KEY, NAVIGATION, ROLES, URLS_SERVERS} from '../../appConfig';
-import {TokenService} from '../token.service';
-import {HttpService} from '../http.service';
-import {catchError, map} from 'rxjs/operators';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
+import { LoginService } from '../login.service';
+import { ADMIN, API_KEY, NAVIGATION, ROLES, URLS_SERVERS } from '../../appConfig';
+import { TokenService } from '../token.service';
+import { HttpService } from '../http.service';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +31,7 @@ export class AuthenticationGuard implements CanActivate {
     return false;
   }
 
-  getRole() {
+  getRole(): boolean | Observable<boolean> {
     const token = JSON.parse(this.tokenService.token);
     const body = JSON.stringify({idToken: token});
     if (!this.loginService.role) {
@@ -41,7 +41,6 @@ export class AuthenticationGuard implements CanActivate {
           return this.checkRole(data.users[0].email);
         }),
         catchError(err => {
-          console.log(err, 'error user');
           this.loginService.isLoggedSubject.next(false);
           this.router.navigate([`${NAVIGATION.login}`]);
           return of(false);
@@ -52,7 +51,7 @@ export class AuthenticationGuard implements CanActivate {
     }
   }
 
-  checkRole(email) {
+  checkRole(email: string): boolean {
     if (email.includes(ADMIN)) {
       this.loginService.role = ROLES.admin;
     } else {
@@ -61,5 +60,4 @@ export class AuthenticationGuard implements CanActivate {
     }
     return true;
   }
-
 }

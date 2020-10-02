@@ -1,11 +1,11 @@
-import {ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {NAVIGATION, VALIDATE_CONFIG} from '../../../appConfig';
-import {LoginService} from '../../../core/login.service';
-import {catchError} from 'rxjs/operators';
-import {HttpErrorResponse} from '@angular/common/http';
-import {of} from 'rxjs';
-import {Router} from '@angular/router';
+import { ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { NAVIGATION, VALIDATE_CONFIG } from '../../../appConfig';
+import { LoginService } from '../../../core/login.service';
+import { catchError } from 'rxjs/operators';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
     this.initForm();
   }
 
-  private initForm() {
+  private initForm(): void {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.minLength(VALIDATE_CONFIG.loginNameLength), Validators.email]],
       password: ['', [Validators.required, Validators.pattern(VALIDATE_CONFIG.password)]]
@@ -56,11 +56,11 @@ export class LoginComponent implements OnInit {
     ).subscribe(() => this.onAuthResponse());
   }
 
-  get email() {
+  get email(): FormControl {
     return this.loginForm.get('email') as FormControl;
   }
 
-  get password() {
+  get password(): FormControl {
     return this.loginForm.get('password') as FormControl;
   }
 
@@ -72,14 +72,13 @@ export class LoginComponent implements OnInit {
     this.loginForm.reset();
   }
 
-  private handleError(error: HttpErrorResponse) {
-    console.log(error);
+  private handleError(error: HttpErrorResponse): Observable<HttpErrorResponse> {
     this.loginForm.reset();
 
     return of(error);
   }
 
-  private onAuthResponse() {
+  private onAuthResponse(): void {
     this.loginForm.reset();
     this.router.navigate([NAVIGATION.dashboard]);
   }

@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-login-button',
@@ -6,18 +6,13 @@ import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output}
   styleUrls: ['./login-button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LoginButtonComponent implements OnInit {
+export class LoginButtonComponent {
   @Input() text: string;
-  @Input() isDisabled = false;
-  @Input() customClass = '';
+  @Input() isDisabled: boolean = false;
+  @Input() customClass: string = '';
   @Output() clickHandler: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-  onClick() {
+  onClick(): void {
     this.clickHandler.emit(true);
   }
 }

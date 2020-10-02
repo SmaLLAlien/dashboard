@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, HostListener, OnInit} from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-scroll-to-top',
@@ -6,22 +6,17 @@ import {ChangeDetectionStrategy, Component, HostListener, OnInit} from '@angular
   styleUrls: ['./scroll-to-top.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ScrollToTopComponent implements OnInit {
+export class ScrollToTopComponent {
   isScrollToTopVisible: boolean = false;
   private minScrollPosition: number = 100;
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
   @HostListener('window:scroll', [])
-  onWindowScroll() {
+  onWindowScroll(): void {
     const currentScrollPosition: number = window.pageYOffset;
     this.isScrollToTopVisible =  currentScrollPosition > this.minScrollPosition;
   }
 
-  scrollToTop() {
+  scrollToTop(): void {
     window.scrollTo(0, 0);
   }
 }

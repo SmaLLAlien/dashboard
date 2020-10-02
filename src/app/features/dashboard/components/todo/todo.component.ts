@@ -1,5 +1,5 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ITodo, NOT_ALLOWED_ACTION} from '../../../../appConfig';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ITodo, NOT_ALLOWED_ACTION } from '../../../../appConfig';
 
 @Component({
   selector: 'app-todo',
@@ -7,7 +7,7 @@ import {ITodo, NOT_ALLOWED_ACTION} from '../../../../appConfig';
   styleUrls: ['./todo.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TodoComponent implements OnInit {
+export class TodoComponent {
   @Input() todo: ITodo;
   @Input() isAdmin: boolean = false;
   @Output() editing: EventEmitter<string> = new EventEmitter<string>();
@@ -23,10 +23,7 @@ export class TodoComponent implements OnInit {
     this.editing.emit(this.todo.id);
   }
 
-  ngOnInit(): void {
-  }
-
-  delete() {
+  delete(): void {
     if (!this.isAdmin) {
       alert(NOT_ALLOWED_ACTION);
       return;

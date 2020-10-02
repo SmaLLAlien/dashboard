@@ -1,10 +1,10 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ITodo, NAVIGATION, NOT_ALLOWED_ACTION, ROLES} from '../../../../appConfig';
-import {takeWhile, tap} from 'rxjs/operators';
-import {EditorService} from '../../services/editor.service';
-import {LoginService} from '../../../../core/login.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ITodo, NAVIGATION, NOT_ALLOWED_ACTION, ROLES } from '../../../../appConfig';
+import { takeWhile, tap } from 'rxjs/operators';
+import { EditorService } from '../../services/editor.service';
+import { LoginService } from '../../../../core/login.service';
 
 @Component({
   selector: 'app-editor',
@@ -13,12 +13,12 @@ import {LoginService} from '../../../../core/login.service';
 })
 export class EditorComponent implements OnInit, OnDestroy {
   todoForm: FormGroup;
-  isValueChanged = false;
-  isEdit = false;
-  private isAdmin = this.loginService.role === ROLES.admin;
+  isValueChanged: boolean = false;
+  isEdit: boolean = false;
+  private isAdmin: boolean = this.loginService.role === ROLES.admin;
 
   private id: string;
-  private isAlive = true;
+  private isAlive: boolean = true;
   private todo: ITodo;
 
   constructor(private fb: FormBuilder,
@@ -43,7 +43,7 @@ export class EditorComponent implements OnInit, OnDestroy {
     }
   }
 
-  formInit() {
+  formInit(): FormGroup {
     return this.fb.group({
       header: [null, [Validators.required, Validators.maxLength(50), Validators.minLength(5)]],
       description: [null, [Validators.maxLength(255)]],
@@ -51,7 +51,7 @@ export class EditorComponent implements OnInit, OnDestroy {
     });
   }
 
-  createLinksArray(links) {
+  createLinksArray(links: string[]): FormArray {
     if (links && links.length) {
       links.forEach(link => {
         this.links.push(this.fb.control([`${link}`]));
@@ -60,7 +60,7 @@ export class EditorComponent implements OnInit, OnDestroy {
     return this.fb.array([]);
   }
 
-  initSubscription() {
+  initSubscription(): void {
     this.todoForm.valueChanges
       .pipe(
         takeWhile(() => this.isAlive)
@@ -95,7 +95,7 @@ export class EditorComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
-  save() {
+  save(): void {
     if (this.todoForm.invalid) {
       return;
     }

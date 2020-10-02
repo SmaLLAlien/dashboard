@@ -1,7 +1,7 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {NAVIGATION} from '../../appConfig';
-import {LoginService} from '../../core/login.service';
-import {Subject} from 'rxjs';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { NAVIGATION } from '../../appConfig';
+import { LoginService } from '../../core/login.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -10,9 +10,9 @@ import {Subject} from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent {
-  login = NAVIGATION.login;
-  dashboard = NAVIGATION.dashboard;
-  add = `${NAVIGATION.dashboard}/${NAVIGATION.new}`;
+  login: string = NAVIGATION.login;
+  dashboard: string = NAVIGATION.dashboard;
+  add: string = `${NAVIGATION.dashboard}/${NAVIGATION.new}`;
   isLogged$: Subject<boolean>;
 
   constructor(private loginService: LoginService) {

@@ -1,9 +1,9 @@
-import {NgModule, Optional, SkipSelf} from '@angular/core';
-import {HttpService} from './http.service';
-import {HTTP_INTERCEPTORS} from '@angular/common/http';
-import {HttpInterceptorInterceptor} from './interceptor/http-interceptor.interceptor';
-import {SpinnerService} from './spinner.service';
-import {TokenService} from './token.service';
+import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { HttpService } from './http.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpInterceptorInterceptor } from './interceptor/http-interceptor.interceptor';
+import { SpinnerService } from './spinner.service';
+import { TokenService } from './token.service';
 
 export abstract class EnsureImportedOnceModule {
   protected constructor(targetModule: any) {
@@ -25,7 +25,7 @@ export abstract class EnsureImportedOnceModule {
   ]
 })
 export class CoreModule extends EnsureImportedOnceModule {
-  public constructor(@SkipSelf() @Optional() parent: CoreModule) {
+  constructor(@SkipSelf() @Optional() parent: CoreModule) {
     super(parent);
   }
 }

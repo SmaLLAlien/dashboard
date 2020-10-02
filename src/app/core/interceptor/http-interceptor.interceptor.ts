@@ -5,15 +5,15 @@ import {
   HttpEvent,
   HttpInterceptor, HttpErrorResponse, HttpResponse
 } from '@angular/common/http';
-import {Observable, throwError} from 'rxjs';
-import {SpinnerService} from '../spinner.service';
-import {catchError, finalize, tap} from 'rxjs/operators';
-import {URLS_SERVERS} from '../../appConfig';
-import {TokenService} from '../token.service';
+import { Observable, throwError } from 'rxjs';
+import { SpinnerService } from '../spinner.service';
+import { catchError, finalize, tap } from 'rxjs/operators';
+import { URLS_SERVERS } from '../../appConfig';
+import { TokenService } from '../token.service';
 
 @Injectable()
 export class HttpInterceptorInterceptor implements HttpInterceptor {
-  count = 0;
+  count: number = 0;
   private inProgress: boolean = false;
   constructor(private spinnerService: SpinnerService,
               private tokenService: TokenService) {}
@@ -40,16 +40,11 @@ export class HttpInterceptorInterceptor implements HttpInterceptor {
 
     const modifiedReq = request.clone({
       setHeaders: headers,
-      // params: new HttpParams().set(
-      //   'auth', this.tokenService.token
-      // )
     });
 
     if (this.tokenService.tokenExpired && !this.inProgress) {
-      console.log(2);
       this.updateToken();
     }
-    console.log(3);
 
     return next.handle(modifiedReq).pipe(
       tap((event: HttpEvent<any>) => {
@@ -67,6 +62,8 @@ export class HttpInterceptorInterceptor implements HttpInterceptor {
       catchError((err: HttpErrorResponse) => {
         const {error} = err;
         if (error.error && error.error.message === 'INVALID_ID_TOKEN') {
+
+          // TODO check error
           console.log(error);
         }
         return throwError(err);
@@ -82,7 +79,7 @@ export class HttpInterceptorInterceptor implements HttpInterceptor {
     );
   }
 
-  updateToken() {
+  updateToken(): void {
     this.inProgress = true;
     if (this.tokenService.refreshToken) {
       this.tokenService.updateToken().subscribe((response) => {
@@ -92,7 +89,6 @@ export class HttpInterceptorInterceptor implements HttpInterceptor {
         this.inProgress = false;
       });
     }
-
   }
 }
 
