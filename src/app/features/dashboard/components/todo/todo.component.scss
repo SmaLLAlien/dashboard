@@ -2,74 +2,75 @@
 .todo {
   background: url("../../../../../assets/images/frame.svg") no-repeat;
   background-size: cover;
-  width: 100%;
-  height: 316px;
-  position: relative;
   border-radius: 5px;
   box-shadow: 0 0 10px 2px rgba(0,0,0,0.75);
+  height: 316px;
+  position: relative;
   transition: all 0.5s;
+  width: 100%;
 
   &:hover {
     transform: scale(1.1);
   }
 
   &__edit {
+    cursor: pointer;
     position: absolute;
     right: 70px;
     top: -10px;
-    cursor: pointer;
   }
 
   &__delete {
-    position: absolute;
-    top: -10px;
     cursor: pointer;
     left: 70px;
+    position: absolute;
+    top: -10px;
   }
 
   &__corner {
+    background: transparent radial-gradient(closest-side at 68% 18%, #f5f5f5 0%, #d9d9d9 100%) 0 0 no-repeat;
+    border-radius: 50%;
+    box-shadow: 0 3px 0 rgba(0, 0, 0, 0.15);
+    height: 20px;
     position: absolute;
     width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: transparent radial-gradient(closest-side at 68% 18%, #F5F5F5 0%, #D9D9D9 100%) 0 0 no-repeat;
-    box-shadow: 0 3px 0 rgba(0, 0, 0, 0.15);
 
     &-left {
-      top: 5px;
       left: 20px;
-    }
-    &-right {
       top: 5px;
+    }
+
+    &-right {
       right: 20px;
+      top: 5px;
     }
   }
 
   &__content {
-    height: 100%;
-    font-family: $lobster;
-    padding: 0 5px;
     color: $textColor;
+    font-family: $lobster;
+    height: 100%;
     overflow-y: auto;
+    padding: 0 5px;
   }
 
   &__header {
-    text-transform: capitalize;
     font-family: $lobster;
-    text-align: center;
     margin: 0;
+    text-align: center;
     text-shadow: 0 5px 6px #d2a56d;
+    text-transform: capitalize;
   }
 
   &__description {
-    margin-top: 10px;
     line-height: 35px;
+    margin-top: 10px;
   }
 
   &__link {
     a {
-      margin-right: 20px;
       color: $textColor;
+      margin-right: 20px;
     }
   }
 

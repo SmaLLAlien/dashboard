@@ -167,7 +167,7 @@
     width: 90.6%;
     margin: 0 auto;
     height: 100%;
-    border: none;
+    border: 0;
     outline: none;
     line-height: 3em;
     font-size: 1.5em;
@@ -181,12 +181,12 @@
   }
 
   input:-webkit-autofill {
-    -webkit-box-shadow:0 0 0 50px saddlebrown inset;
+    -webkit-box-shadow: 0 0 0 50px #8b4513 inset;
     -webkit-text-fill-color: #333;
   }
 
   input:-webkit-autofill:focus {
-    -webkit-box-shadow: 0 0 0 50px saddlebrown inset,0 0 0 50px white inset;
+    -webkit-box-shadow: 0 0 0 50px #8b4513 inset,0 0 0 50px #ffffff inset;
     -webkit-text-fill-color: #333;
   }
 
@@ -198,6 +198,7 @@
   }
 
 }
+
 .controls {
   display: flex;
   justify-content: center;

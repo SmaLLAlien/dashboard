@@ -3,21 +3,22 @@
   height: calc(100vh - 100px);
 
   .todo {
-    width: 100%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
     height: calc(100vh - 100px);
+    justify-content: space-around;
+    width: 100%;
 
     &__item {
-      width: 480px;
       margin: 20px 20px;
+      width: 480px;
     }
 
     &__empty {
       @include empty;
     }
   }
+
   &__empty {
     @include empty;
   }

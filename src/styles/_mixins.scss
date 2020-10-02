@@ -1,12 +1,12 @@
 @mixin empty {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
   align-items: center;
+  color: $textColor;
+  display: flex;
   font-family: $lobster;
   font-size: 2em;
-  color: $textColor;
-  text-shadow: 0 5px 6px #d2a56d;
+  height: 100%;
+  justify-content: center;
   margin-top: -100px;
+  text-shadow: 0 5px 6px #d2a56d;
+  width: 100%;
 }

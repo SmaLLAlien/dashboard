@@ -1,39 +1,41 @@
 .container {
+  box-sizing: border-box;
+  margin: 0 auto;
+  max-width: 1920px;
   min-height: 100vh;
   min-width: 480px;
-  max-width: 1920px;
-  margin: 0 auto;
   padding-top: 1px;
   width: 100%;
-  box-sizing: border-box;
 
   .nav {
-    width: 50%;
     display: flex;
     justify-content: flex-end;
     margin-left: auto;
+    width: 50%;
   }
 
   app-header {
-    width: 100%;
     margin-bottom: 50px;
+    width: 100%;
   }
 }
+
 @media all and (max-width: 980px){
     .container {
       .nav {
-        width: 100%;
         justify-content: center;
+        width: 100%;
       }
     }
 }
+
 .spinner {
-  position: absolute;
-  width: 100%;
-  min-height: 100vh;
-  top: 0;
-  left: 0;
   box-sizing: border-box;
-  z-index: 10000;
+  left: 0;
+  min-height: 100vh;
   overflow: hidden;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 10000;
 }
