@@ -69,6 +69,11 @@
   &__link {
     a {
       margin-right: 20px;
+      color: $textColor;
     }
+  }
+
+  &__link-item {
+    margin-bottom: 15px;
   }
 }

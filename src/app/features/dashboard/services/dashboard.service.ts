@@ -7,13 +7,6 @@ import {map} from 'rxjs/operators';
 @Injectable()
 export class DashboardService {
   private prefix = 'todo.json';
-  // private todo: ITodo =  {
-  //   id: null,
-  //   header: '',
-  //   description: 'description description description description description descriptio ndescription description description description description description description descriptio ndescription description description description description description description descriptio ndescription description description description description description description descriptio ndescription description description',
-  //   links: ['https://metanit.com/web/angular2/8.4.php', 'https://metanit.com/web/angular2/8.4.php']
-  // };
-  // private todos: ITodo[] = [{...this.todo}, {...this.todo},{...this.todo},{...this.todo},{...this.todo},{...this.todo},{...this.todo},{...this.todo},{...this.todo}];
 
   constructor(private httpService: HttpService) { }
 
@@ -25,17 +18,10 @@ export class DashboardService {
         return keys.map(key => Object.assign({}, response[key], {id: key}));
       })
     );
-    // return of(this.todos)
   }
 
   deleteTodo(id: string) {
     const url = `https://dashboard-70225.firebaseio.com/todo/${id}.json`;
     return this.httpService.delete(url);
   }
-
-  // addTodo(): Observable<{ name: string }> {
-  //   const url = URLS_SERVERS.todo + this.prefix;
-  //   const body = JSON.stringify(this.todo);
-  //   return this.httpService.post(url, body);
-  // }
 }

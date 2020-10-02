@@ -6,8 +6,13 @@
     <p class="todo__edit" (click)="edit()">Edit</p>
     <p class="todo__delete" (click)="delete()">Delete</p>
     <p *ngIf="todo.description" class="todo__description">{{todo.description}}</p>
-    <div class="todo__link" *ngIf="todo.links">
-      <a [attr.href]="link" *ngFor="let link of todo.links" >{{getHost(link)}}</a>
+    <div *ngIf="todo.links">
+      {{'Links:' | uppercase}}
+      <ul class="todo__link" >
+        <li class="todo__link-item" *ngFor="let link of todo.links">
+          <a [attr.href]="link">{{getHost(link)}}</a>
+        </li>
+      </ul>
     </div>
   </div>
 </div>
