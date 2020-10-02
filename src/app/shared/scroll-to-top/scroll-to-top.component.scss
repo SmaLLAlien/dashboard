@@ -1,6 +1,6 @@
 @import "main";
 .top {
-  background: url("/assets/images/ui_background.png") no-repeat;
+  background: url("../../../assets/images/ui_background.png") no-repeat;
   background-size: cover;
   border: 1px solid $textColor;
   border-radius: 10px 0 0 10px;
@@ -13,7 +13,7 @@
   width: 80px;
 
   &::before {
-    background: url("/assets/images/up-arrow.svg") no-repeat center center;
+    background: url("../../../assets/images/up-arrow.svg") no-repeat center center;
     content: '';
     display: block;
     height: 100%;
@@ -21,7 +21,7 @@
   }
 
   &:hover {
-    background: linear-gradient(rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.15) 100%), url("/assets/images/ui_background.png") no-repeat center center;
+    background: linear-gradient(rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.15) 100%), url("../../../assets/images/ui_background.png") no-repeat center center;
     background-size: cover;
   }
 }

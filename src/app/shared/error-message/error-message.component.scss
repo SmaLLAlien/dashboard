@@ -1,7 +1,7 @@
 @import "src/styles/main";
 .validators {
   align-items: center;
-  background: url("/assets/images/errors.png") no-repeat center center;
+  background: url("../../../assets/images/errors.png") no-repeat center center;
   background-size: cover;
   box-sizing: border-box;
   color: darken($textColor, 50%);
