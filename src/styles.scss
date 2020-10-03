@@ -1,5 +1,6 @@
 @import '~normalize.css';
 @import "styles/main";
+@import "fonts/fonts";
 body {
   background: url('./assets/images/Melamine-wood-005.png');
   margin: 0;
@@ -23,4 +24,19 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #b30000;
+}
+
+@font-face {
+  font-family: 'Lobster';
+  src: url($Lobster-text-opentype-font-path) format('opentype'),
+  url($Lobster-text-woff-font-path) format('woff'),
+  url($Lobster-text-woff2-font-path) format('woff2');
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url($Helvetica-text-opentype-font-path);
+  src: url($Helvetica-text-woff-font-path) format('woff'),
+  url($Helvetica-text-woff2-font-path) format('woff2');
+  font-style: normal;
 }
